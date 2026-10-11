@@ -1,0 +1,5 @@
+* Welcome er startsiden ('' -> welcome)
+* Burgermenu-knappen viser/skjuler menuen
+* På mobil starter menuen skjult
+* På desktop starter menuen synlig
+* Menuens tilstand styres af et signal<boolean>

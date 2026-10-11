@@ -1,0 +1,44 @@
+<div class="layout">
+
+  <header class="topbar">
+    <button
+      class="burger"
+      (click)="toggleMenu()">
+
+      ☰
+    </button>
+
+    <h1>My Website</h1>
+  </header>
+
+  @if(menuVisible()) {
+    <nav class="sidebar">
+
+      <a routerLink="/welcome"
+         routerLinkActive="active">
+        Welcome
+      </a>
+
+      <a routerLink="/news"
+         routerLinkActive="active">
+        News
+      </a>
+
+      <a routerLink="/rules"
+         routerLinkActive="active">
+        Rules
+      </a>
+
+      <a routerLink="/contact"
+         routerLinkActive="active">
+        Contact
+      </a>
+
+    </nav>
+  }
+
+  <main class="content">
+    <router-outlet />
+  </main>
+
+</div>

@@ -1,13 +1,45 @@
-import { Component, signal, ChangeDetectionStrategy } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import {
+  Component,
+  signal,
+  HostListener,
+  ChangeDetectionStrategy
+} from '@angular/core';
+
+import {
+  RouterOutlet,
+  RouterLink,
+  RouterLinkActive
+} from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [
+    RouterOutlet,
+    RouterLink,
+    RouterLinkActive
+  ],
   templateUrl: './app.html',
-  changeDetection: ChangeDetectionStrategy.Eager,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrl: './app.scss'
 })
 export class App {
+
   protected readonly title = signal('hello-world-app');
+
+  protected readonly menuVisible =
+    signal(window.innerWidth >= 768);
+
+  toggleMenu(): void {
+    this.menuVisible.update(v => !v);
+  }
+
+  @HostListener('window:resize')
+  onResize(): void {
+
+    if (window.innerWidth >= 768) {
+      this.menuVisible.set(true);
+    } else {
+      this.menuVisible.set(false);
+    }
+  }
 }
