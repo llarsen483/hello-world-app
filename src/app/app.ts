@@ -33,6 +33,12 @@ export class App {
     this.menuVisible.update(v => !v);
   }
 
+  closeMenuIfMobile(): void {
+    if (window.innerWidth < 768) {
+      this.menuVisible.set(false);
+    }
+  }
+
   @HostListener('window:resize')
   onResize(): void {
 

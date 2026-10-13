@@ -16,29 +16,33 @@
 
     <nav class="sidebar">
 
-      <a
-        routerLink="/welcome"
-        routerLinkActive="active">
-        Welcome
-      </a>
+  <a
+    routerLink="/welcome"
+    routerLinkActive="active"
+    (click)="closeMenuIfMobile()">
+    Welcome
+  </a>
 
-      <a
-        routerLink="/news"
-        routerLinkActive="active">
-        News
-      </a>
+  <a
+    routerLink="/news"
+    routerLinkActive="active"
+    (click)="closeMenuIfMobile()">
+    News
+  </a>
 
-      <a
-        routerLink="/rules"
-        routerLinkActive="active">
-        Rules
-      </a>
+  <a
+    routerLink="/rules"
+    routerLinkActive="active"
+    (click)="closeMenuIfMobile()">
+    Rules
+  </a>
 
-      <a
-        routerLink="/contact"
-        routerLinkActive="active">
-        Contact
-      </a>
+  <a
+    routerLink="/contact"
+    routerLinkActive="active"
+    (click)="closeMenuIfMobile()">
+    Contact
+  </a>
 
     </nav>
 
