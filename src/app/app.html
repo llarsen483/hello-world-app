@@ -2,7 +2,7 @@
 
   <button
     class="burger"
-    (click)="toggleMenu()">
+    (click)="menu.toggleMenu()">
     ☰
   </button>
 
@@ -12,35 +12,35 @@
 
 <div class="container">
 
-  @if (menuVisible()) {
+  @if (menu.menuVisible()) {
 
     <nav class="sidebar">
 
   <a
     routerLink="/welcome"
     routerLinkActive="active"
-    (click)="closeMenuIfMobile()">
+    (click)="menu.closeMenuIfMobile()">
     Welcome
   </a>
 
   <a
     routerLink="/news"
     routerLinkActive="active"
-    (click)="closeMenuIfMobile()">
+    (click)="menu.closeMenuIfMobile()">
     News
   </a>
 
   <a
     routerLink="/rules"
     routerLinkActive="active"
-    (click)="closeMenuIfMobile()">
+    (click)="menu.closeMenuIfMobile()">
     Rules
   </a>
 
   <a
     routerLink="/contact"
     routerLinkActive="active"
-    (click)="closeMenuIfMobile()">
+    (click)="menu.closeMenuIfMobile()">
     Contact
   </a>
 

@@ -1,15 +1,18 @@
 import {
+  ChangeDetectionStrategy,
   Component,
-  signal,
   HostListener,
-  ChangeDetectionStrategy
+  inject,
+  signal
 } from '@angular/core';
 
 import {
-  RouterOutlet,
   RouterLink,
-  RouterLinkActive
+  RouterLinkActive,
+  RouterOutlet
 } from '@angular/router';
+
+import { MenuStateService } from './services/menu-state';
 
 @Component({
   selector: 'app-root',
@@ -19,33 +22,16 @@ import {
     RouterLinkActive
   ],
   templateUrl: './app.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  styleUrl: './app.scss'
+  styleUrl: './app.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class App {
-
   protected readonly title = signal('hello-world-app');
 
-  readonly menuVisible =
-    signal(window.innerWidth >= 768);
-
-  toggleMenu(): void {
-    this.menuVisible.update(v => !v);
-  }
-
-  closeMenuIfMobile(): void {
-    if (window.innerWidth < 768) {
-      this.menuVisible.set(false);
-    }
-  }
+  readonly menu = inject(MenuStateService);
 
   @HostListener('window:resize')
   onResize(): void {
-
-    if (window.innerWidth >= 768) {
-      this.menuVisible.set(true);
-    } else {
-      this.menuVisible.set(false);
-    }
+    this.menu.updateWindowWidth(window.innerWidth);
   }
 }

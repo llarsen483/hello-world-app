@@ -1,38 +1,61 @@
 import { describe, expect, it } from 'vitest';
-import { App } from './app';
+import { MenuStateService } from './services/menu-state';
 
-describe('App', () => {
+describe('MenuStateService', () => {
 
-  it('should create', () => {
-    const app = new App();
+  it('should show menu on desktop', () => {
 
-    expect(app).toBeTruthy();
+    const service = new MenuStateService();
+
+    service.updateWindowWidth(1024);
+
+    expect(service.isDesktop()).toBe(true);
+    expect(service.menuVisible()).toBe(true);
   });
 
-  it('should toggle menu visibility', () => {
-    const app = new App();
+  it('should hide menu on mobile by default', () => {
 
-    const initialValue = app['menuVisible']();
+    const service = new MenuStateService();
 
-    app.toggleMenu();
+    service.updateWindowWidth(500);
 
-    expect(app['menuVisible']()).toBe(!initialValue);
+    expect(service.isDesktop()).toBe(false);
+    expect(service.menuVisible()).toBe(false);
   });
 
-  it('should close menu on mobile', () => {
-    const app = new App();
+  it('should open menu when toggled', () => {
 
-    Object.defineProperty(window, 'innerWidth', {
-      writable: true,
-      configurable: true,
-      value: 500
-    });
+    const service = new MenuStateService();
 
-    app['menuVisible'].set(true);
+    service.updateWindowWidth(500);
 
-    app.closeMenuIfMobile();
+    service.toggleMenu();
 
-    expect(app.menuVisible()).toBe(false);
+    expect(service.menuVisible()).toBe(true);
+  });
+
+  it('should close menu after navigation on mobile', () => {
+
+    const service = new MenuStateService();
+
+    service.updateWindowWidth(500);
+
+    service.toggleMenu();
+
+    service.closeMenuIfMobile();
+
+    expect(service.menuVisible()).toBe(false);
+  });
+
+  it('should keep menu visible on desktop', () => {
+
+    const service = new MenuStateService();
+
+    service.updateWindowWidth(1200);
+
+    service.closeMenuIfMobile();
+
+    expect(service.menuVisible()).toBe(true);
   });
 
 });
