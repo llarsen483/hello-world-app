@@ -26,7 +26,7 @@ export class App {
 
   protected readonly title = signal('hello-world-app');
 
-  protected readonly menuVisible =
+  readonly menuVisible =
     signal(window.innerWidth >= 768);
 
   toggleMenu(): void {
