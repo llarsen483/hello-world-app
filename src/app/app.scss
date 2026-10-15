@@ -47,3 +47,49 @@
   flex: 1;
   padding: 1rem;
 }
+
+.burger {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  width: 40px;
+  height: 40px;
+
+  background: transparent;
+  border: none;
+  cursor: pointer;
+
+  padding: 0;
+}
+
+.burger span {
+  width: 28px;
+  height: 3px;
+
+  background: white;
+
+  margin: 3px auto;
+
+  border-radius: 3px;
+
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease;
+}
+
+.burger.open span:nth-child(1) {
+  transform:
+    translateY(9px)
+    rotate(45deg);
+}
+
+.burger.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.burger.open span:nth-child(3) {
+  transform:
+    translateY(-9px)
+    rotate(-45deg);
+}

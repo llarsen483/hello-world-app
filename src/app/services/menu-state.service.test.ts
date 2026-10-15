@@ -12,7 +12,7 @@ describe('MenuStateService', () => {
 
     const service = new MenuStateService();
 
-    service.windowWidth.set(1024);
+    service.updateWindowWidth(1024);
 
     expect(service.isDesktop()).toBe(true);
     expect(service.menuVisible()).toBe(true);
@@ -22,7 +22,7 @@ describe('MenuStateService', () => {
 
     const service = new MenuStateService();
 
-    service.windowWidth.set(500);
+    service.updateWindowWidth(500);
 
     expect(service.isDesktop()).toBe(false);
     expect(service.menuVisible()).toBe(false);
@@ -35,18 +35,55 @@ describe('MenuStateService', () => {
     service.toggleMenu();
 
     expect(service.menuOpen()).toBe(true);
+    expect(service.menuVisible()).toBe(true);
+  });
+
+  it('should close menu when toggled twice', () => {
+
+    const service = new MenuStateService();
+
+    service.toggleMenu();
+    service.toggleMenu();
+
+    expect(service.menuOpen()).toBe(false);
   });
 
   it('should close menu after navigation on mobile', () => {
 
     const service = new MenuStateService();
 
-    service.windowWidth.set(500);
-    service.menuOpen.set(true);
+    service.updateWindowWidth(500);
+    service.openMenu();
 
     service.closeMenuIfMobile();
 
+    expect(service.menuOpen()).toBe(false);
     expect(service.menuVisible()).toBe(false);
+  });
+
+  it('should keep menu open on desktop after navigation', () => {
+
+    const service = new MenuStateService();
+
+    service.updateWindowWidth(1024);
+    service.openMenu();
+
+    service.closeMenuIfMobile();
+
+    expect(service.menuVisible()).toBe(true);
+  });
+
+  it('should update desktop state when resized', () => {
+
+    const service = new MenuStateService();
+
+    service.updateWindowWidth(500);
+
+    expect(service.isDesktop()).toBe(false);
+
+    service.updateWindowWidth(1024);
+
+    expect(service.isDesktop()).toBe(true);
   });
 
 });

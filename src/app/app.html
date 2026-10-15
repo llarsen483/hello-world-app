@@ -3,9 +3,12 @@
   <button
     class="burger"
     type="button"
-    (click)="menu.toggleMenu()">
+    (click)="menu.toggleMenu()"
+    [class.open]="menu.menuVisible()">
 
-    ☰
+    <span></span>
+    <span></span>
+    <span></span>
 
   </button>
 

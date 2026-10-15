@@ -1,8 +1,8 @@
 import {
   Component,
   ChangeDetectionStrategy,
-  inject,
-  signal
+  HostListener,
+  inject
 } from '@angular/core';
 
 import {
@@ -25,5 +25,12 @@ import { MenuStateService } from './services/menu-state.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class App {
-  protected readonly menu = inject(MenuStateService);
+
+  protected readonly menu =
+    inject(MenuStateService);
+
+  @HostListener('window:resize')
+  onResize(): void {
+    this.menu.updateWindowWidth(window.innerWidth);
+  }
 }
