@@ -17,10 +17,12 @@ export class MenuStateService {
     () => this.windowWidth() >= this.desktopBreakpoint
   );
 
-  readonly menuOpen = signal(false);
+  readonly menuOpen = signal(
+    window.innerWidth >= this.desktopBreakpoint
+  );
 
   readonly menuVisible = computed(
-    () => this.isDesktop() || this.menuOpen()
+    () => this.menuOpen()
   );
 
   toggleMenu(): void {
@@ -42,6 +44,19 @@ export class MenuStateService {
   }
 
   updateWindowWidth(width: number): void {
+
+    const wasDesktop = this.isDesktop();
+
     this.windowWidth.set(width);
+
+    const isDesktop = this.isDesktop();
+
+    if (!wasDesktop && isDesktop) {
+      this.menuOpen.set(true);
+    }
+
+    if (wasDesktop && !isDesktop) {
+      this.menuOpen.set(false);
+    }
   }
 }
