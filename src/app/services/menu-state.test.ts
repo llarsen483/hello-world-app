@@ -7,7 +7,7 @@ describe('MenuStateService', () => {
 
     const service = new MenuStateService();
 
-    service.updateWindowWidth(1024);
+    service.onWindowResize(1024);
 
     expect(service.isDesktop()).toBe(true);
     expect(service.menuVisible()).toBe(true);
@@ -17,7 +17,7 @@ describe('MenuStateService', () => {
 
     const service = new MenuStateService();
 
-    service.updateWindowWidth(500);
+    service.onWindowResize(500);
 
     expect(service.isDesktop()).toBe(false);
     expect(service.menuVisible()).toBe(false);
@@ -27,7 +27,7 @@ describe('MenuStateService', () => {
 
     const service = new MenuStateService();
 
-    service.updateWindowWidth(500);
+    service.onWindowResize(500);
 
     service.toggleMenu();
 
@@ -38,7 +38,7 @@ describe('MenuStateService', () => {
 
     const service = new MenuStateService();
 
-    service.updateWindowWidth(500);
+    service.onWindowResize(500);
 
     service.toggleMenu();
 
@@ -51,7 +51,7 @@ describe('MenuStateService', () => {
 
     const service = new MenuStateService();
 
-    service.updateWindowWidth(1200);
+    service.onWindowResize(1200);
 
     service.closeMenuIfMobile();
 

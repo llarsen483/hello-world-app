@@ -9,10 +9,12 @@ import {
 })
 export class MenuStateService {
 
+  private readonly desktopBreakpoint = 768;
+
   readonly windowWidth = signal(window.innerWidth);
 
   readonly isDesktop = computed(
-    () => this.windowWidth() >= 768
+    () => this.windowWidth() >= this.desktopBreakpoint
   );
 
   readonly menuOpen = signal(false);
@@ -22,16 +24,20 @@ export class MenuStateService {
   );
 
   toggleMenu(): void {
-    this.menuOpen.update(value => !value);
+    this.menuOpen.update(open => !open);
+  }
+
+  closeMenu(): void {
+    this.menuOpen.set(false);
   }
 
   closeMenuIfMobile(): void {
     if (!this.isDesktop()) {
-      this.menuOpen.set(false);
+      this.closeMenu();
     }
   }
 
-  updateWindowWidth(width: number): void {
+  onWindowResize(width: number): void {
     this.windowWidth.set(width);
   }
 }
