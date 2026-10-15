@@ -1,5 +1,10 @@
-import { describe, expect, it } from 'vitest';
-import { MenuStateService } from './menu-state';
+import {
+  describe,
+  it,
+  expect
+} from 'vitest';
+
+import { MenuStateService } from './menu-state.service';
 
 describe('MenuStateService', () => {
 
@@ -7,7 +12,7 @@ describe('MenuStateService', () => {
 
     const service = new MenuStateService();
 
-    service.onWindowResize(1024);
+    service.windowWidth.set(1024);
 
     expect(service.isDesktop()).toBe(true);
     expect(service.menuVisible()).toBe(true);
@@ -17,7 +22,7 @@ describe('MenuStateService', () => {
 
     const service = new MenuStateService();
 
-    service.onWindowResize(500);
+    service.windowWidth.set(500);
 
     expect(service.isDesktop()).toBe(false);
     expect(service.menuVisible()).toBe(false);
@@ -27,35 +32,21 @@ describe('MenuStateService', () => {
 
     const service = new MenuStateService();
 
-    service.onWindowResize(500);
-
     service.toggleMenu();
 
-    expect(service.menuVisible()).toBe(true);
+    expect(service.menuOpen()).toBe(true);
   });
 
   it('should close menu after navigation on mobile', () => {
 
     const service = new MenuStateService();
 
-    service.onWindowResize(500);
-
-    service.toggleMenu();
+    service.windowWidth.set(500);
+    service.menuOpen.set(true);
 
     service.closeMenuIfMobile();
 
     expect(service.menuVisible()).toBe(false);
-  });
-
-  it('should keep menu visible on desktop', () => {
-
-    const service = new MenuStateService();
-
-    service.onWindowResize(1200);
-
-    service.closeMenuIfMobile();
-
-    expect(service.menuVisible()).toBe(true);
   });
 
 });

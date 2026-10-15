@@ -1,18 +1,17 @@
 import {
-  ChangeDetectionStrategy,
   Component,
-  HostListener,
+  ChangeDetectionStrategy,
   inject,
   signal
 } from '@angular/core';
 
 import {
+  RouterOutlet,
   RouterLink,
-  RouterLinkActive,
-  RouterOutlet
+  RouterLinkActive
 } from '@angular/router';
 
-import { MenuStateService } from './services/menu-state';
+import { MenuStateService } from './services/menu-state.service';
 
 @Component({
   selector: 'app-root',
@@ -26,12 +25,5 @@ import { MenuStateService } from './services/menu-state';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class App {
-  protected readonly title = signal('hello-world-app');
-
-  readonly menu = inject(MenuStateService);
-
-  @HostListener('window:resize')
-  onResize(): void {
-    this.menu.updateWindowWidth(window.innerWidth);
-  }
+  protected readonly menu = inject(MenuStateService);
 }

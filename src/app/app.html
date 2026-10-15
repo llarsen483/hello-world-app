@@ -2,11 +2,14 @@
 
   <button
     class="burger"
+    type="button"
     (click)="menu.toggleMenu()">
+
     ☰
+
   </button>
 
-  <h1>{{ title() }}</h1>
+  <h1>Hello World App</h1>
 
 </header>
 
@@ -16,33 +19,33 @@
 
     <nav class="sidebar">
 
-  <a
-    routerLink="/welcome"
-    routerLinkActive="active"
-    (click)="menu.closeMenuIfMobile()">
-    Welcome
-  </a>
+      <a
+        routerLink="/welcome"
+        routerLinkActive="active"
+        (click)="menu.closeMenuIfMobile()">
+        Welcome
+      </a>
 
-  <a
-    routerLink="/news"
-    routerLinkActive="active"
-    (click)="menu.closeMenuIfMobile()">
-    News
-  </a>
+      <a
+        routerLink="/news"
+        routerLinkActive="active"
+        (click)="menu.closeMenuIfMobile()">
+        News
+      </a>
 
-  <a
-    routerLink="/rules"
-    routerLinkActive="active"
-    (click)="menu.closeMenuIfMobile()">
-    Rules
-  </a>
+      <a
+        routerLink="/rules"
+        routerLinkActive="active"
+        (click)="menu.closeMenuIfMobile()">
+        Rules
+      </a>
 
-  <a
-    routerLink="/contact"
-    routerLinkActive="active"
-    (click)="menu.closeMenuIfMobile()">
-    Contact
-  </a>
+      <a
+        routerLink="/contact"
+        routerLinkActive="active"
+        (click)="menu.closeMenuIfMobile()">
+        Contact
+      </a>
 
     </nav>
 

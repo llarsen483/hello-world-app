@@ -1,7 +1,9 @@
 import {
   Injectable,
+  signal,
   computed,
-  signal
+  inject,
+  DestroyRef
 } from '@angular/core';
 
 @Injectable({
@@ -23,8 +25,27 @@ export class MenuStateService {
     () => this.isDesktop() || this.menuOpen()
   );
 
+  private readonly destroyRef = inject(DestroyRef);
+
+  constructor() {
+
+    const resizeHandler = () => {
+      this.windowWidth.set(window.innerWidth);
+    };
+
+    window.addEventListener('resize', resizeHandler);
+
+    this.destroyRef.onDestroy(() => {
+      window.removeEventListener('resize', resizeHandler);
+    });
+  }
+
   toggleMenu(): void {
     this.menuOpen.update(open => !open);
+  }
+
+  openMenu(): void {
+    this.menuOpen.set(true);
   }
 
   closeMenu(): void {
@@ -35,9 +56,5 @@ export class MenuStateService {
     if (!this.isDesktop()) {
       this.closeMenu();
     }
-  }
-
-  onWindowResize(width: number): void {
-    this.windowWidth.set(width);
   }
 }
