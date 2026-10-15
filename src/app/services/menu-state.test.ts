@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { MenuStateService } from './services/menu-state';
+import { MenuStateService } from './menu-state';
 
 describe('MenuStateService', () => {
 
