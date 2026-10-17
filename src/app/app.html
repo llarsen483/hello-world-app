@@ -18,41 +18,39 @@
 
 <div class="container">
 
-  @if (menu.menuVisible()) {
+  <nav
+    class="sidebar"
+    [class.closed]="!menu.menuVisible()">
 
-    <nav class="sidebar">
+    <a
+      routerLink="/welcome"
+      routerLinkActive="active"
+      (click)="menu.closeMenuIfMobile()">
+      Welcome
+    </a>
 
-      <a
-        routerLink="/welcome"
-        routerLinkActive="active"
-        (click)="menu.closeMenuIfMobile()">
-        Welcome
-      </a>
+    <a
+      routerLink="/news"
+      routerLinkActive="active"
+      (click)="menu.closeMenuIfMobile()">
+      News
+    </a>
 
-      <a
-        routerLink="/news"
-        routerLinkActive="active"
-        (click)="menu.closeMenuIfMobile()">
-        News
-      </a>
+    <a
+      routerLink="/rules"
+      routerLinkActive="active"
+      (click)="menu.closeMenuIfMobile()">
+      Rules
+    </a>
 
-      <a
-        routerLink="/rules"
-        routerLinkActive="active"
-        (click)="menu.closeMenuIfMobile()">
-        Rules
-      </a>
+    <a
+      routerLink="/contact"
+      routerLinkActive="active"
+      (click)="menu.closeMenuIfMobile()">
+      Contact
+    </a>
 
-      <a
-        routerLink="/contact"
-        routerLinkActive="active"
-        (click)="menu.closeMenuIfMobile()">
-        Contact
-      </a>
-
-    </nav>
-
-  }
+  </nav>
 
   <main class="content">
     <router-outlet />
